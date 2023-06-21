@@ -30,12 +30,12 @@ const Buscador = styled.input`
   color: #0a0a0a;
   text-align: center;
 `
+const Header = ({pokemonFilter} : any) => {
 
-const Header = () => {
   return (
     <HeaderCustom>
       <LogoCustom src={logo} alt="logo do pokemon" />
-      <Buscador type="text" name="buscador" placeholder="Nome do pokémon"/>
+      <Buscador onChange={(e) => pokemonFilter(e.target.value)} type="text" name="buscador" placeholder="Nome do pokémon"/>
     </HeaderCustom>
   )
 }
