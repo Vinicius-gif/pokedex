@@ -1,4 +1,5 @@
 import { Card, CardActionArea, CardMedia, CardContent, Box, Typography } from "@mui/material"
+import { typeHandler } from "../../utils/typeHandler"
 
 interface Props {
   nome: string,
@@ -8,12 +9,7 @@ interface Props {
 
 const CardPokemon = ({nome, imagem, tipos}: Props) => {
 
-  const typeHandler = () => {
-    if (tipos[1]) {
-      return tipos[0].type.name + " | " + tipos[1].type.name;
-    }
-    return tipos[0].type.name;
-  };
+  
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -25,7 +21,7 @@ const CardPokemon = ({nome, imagem, tipos}: Props) => {
               {nome}
             </Typography>
             <Typography gutterBottom variant="caption" component="div">
-              {typeHandler()}
+              {typeHandler(tipos)}
             </Typography>
           </Box>
         </CardContent>

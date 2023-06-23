@@ -1,5 +1,6 @@
 import { styled } from 'styled-components';
 import logo from './assets/pokemon-logo.png';
+import { useNavigate } from 'react-router-dom';
 
 const HeaderCustom = styled.header`
   width: 100%;
@@ -13,6 +14,7 @@ const LogoCustom = styled.img`
   width: 10%;
   height: 20%;
   margin: 15px;
+  cursor: pointer;
 `
 
 const Buscador = styled.input`
@@ -30,12 +32,17 @@ const Buscador = styled.input`
   color: #0a0a0a;
   text-align: center;
 `
-const Header = ({pokemonFilter} : any) => {
+const Header = ({ pokemonFilter, hideSearch = true }: any) => {
+
+  const navigate = useNavigate()
 
   return (
     <HeaderCustom>
-      <LogoCustom src={logo} alt="logo do pokemon" />
-      <Buscador onChange={(e) => pokemonFilter(e.target.value)} type="text" name="buscador" placeholder="Nome do pokémon"/>
+      <LogoCustom src={logo} alt="logo do pokemon" onClick={() => navigate('/')}/>
+      {
+        hideSearch &&
+          <Buscador onChange={(e) => pokemonFilter(e.target.value)} type="text" name="buscador" placeholder="Nome do pokémon" />
+      }
     </HeaderCustom>
   )
 }

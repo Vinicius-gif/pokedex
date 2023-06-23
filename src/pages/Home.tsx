@@ -5,6 +5,7 @@ import { Container, Grid, Box } from "@mui/material";
 import CardPokemon from "../componentes/CardPokemon";
 import Skeletons from "../componentes/Skeletons";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Titulo = styled.h2`
   text-align: center;
@@ -14,9 +15,10 @@ const Titulo = styled.h2`
   font-size: 300%;
 `
 
-function Home() {
+function Home({setPokemonData} : any) {
 
   const [pokemons, setPokemons] = useState<any>([]);
+  const navigate = useNavigate();
 
   const getPokemons = () => {
     var endpoints = [];
@@ -43,6 +45,11 @@ function Home() {
     setPokemons(pokemonsFiltrados)
   }
 
+  const pokemonPickHandler = (pokemonData : any) => {
+    setPokemonData(pokemonData)
+    navigate('/perfil')
+  }
+
   return (
     <>
       <Header pokemonFilter={pokemonFilter} />
@@ -55,7 +62,7 @@ function Home() {
               :
               pokemons.map((pokemon: any) => (
                 <Grid item xs={12} sm={6} md={4} lg={2} key={pokemon.data.name}>
-                  <Box>
+                  <Box onClick={() => pokemonPickHandler(pokemon.data)}>
                     <CardPokemon
                       nome={pokemon.data.name}
                       imagem={pokemon.data.sprites.front_default}
